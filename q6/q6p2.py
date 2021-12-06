@@ -11,11 +11,9 @@ for c in counters_flat:
     pop[c, 1] += 1
 print(f"{pop=}")
 for _ in range(DAYS):
-    spawn = pop[0, 1]
-    pop[0, 1] = 0
+    spawn, pop[0, 1] = pop[0, 1], 0
     pop[:, 1] = np.roll(pop[:, 1], -1)
-    pop[CYCLE, 1] += spawn
-    pop[START, 1] += spawn
+    pop[[CYCLE, START], 1] += spawn
     print(f"{pop=}")
 fish = sum(pop[:, 1])
 print(f"{fish=}")
