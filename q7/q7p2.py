@@ -2,10 +2,25 @@ import fileinput
 import numpy as np
 
 
+def memoize(function):
+    cache = {}
+
+    def decorated_function(*args):
+        if args in cache:
+            return cache[args]
+        else:
+            val = function(*args)
+            cache[args] = val
+            return val
+    return decorated_function
+
+
+@memoize
 def tri(size): return np.fromfunction(
     np.vectorize(lambda x: np.sum(np.arange(x+1))), (size,), dtype=int)
 
 
+@memoize
 def focus(size, x):
     return np.concatenate([np.flip(tri(x+1)[1:]), tri(size-x)])
 
