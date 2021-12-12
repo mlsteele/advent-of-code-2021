@@ -26,11 +26,12 @@ segments = np.array([
 print(f"{segments=}")
 brightness = np.sum(segments, axis=1)
 print(f"{brightness=}")
-# unique = np.flip(np.transpose(
-#     np.array(np.unique(brightness, return_index=True))))
-# xxx this is not the unique you are looking for
-unique = np.unique(brightness, return_index=True)
+unique = sorted([brightness.tolist().index(b)
+                 for b in np.nonzero(np.bincount(brightness) == 1)[0]])
 print(f"{unique=}")
+
+code = np.ones((7, 7))
+print(code)
 
 # # acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf
 # rows = [tuple(half.strip().split() for half in line.split('|'))
