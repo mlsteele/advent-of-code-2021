@@ -1,5 +1,4 @@
 import fileinput
-from functools import reduce
 PAIRS = {'(': ')', '{': '}', '[': ']', '<': '>', }
 START = set(PAIRS.keys())
 END = set(PAIRS.values())
